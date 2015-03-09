@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <gpx xmlns="http://www.topografix.com/GPX/1/1" version="1.1" creator="iSailor">
+    <rte>
+      <name>Hoorn - Enkhuizen</name>
+      <rtept lat="52.631603782" lon="5.063360003">
+      </rtept>
+      <rtept lat="52.610063046" lon="5.134856491">
+      </rtept>
+      <rtept lat="52.648505834" lon="5.231013058">
+      </rtept>
+      <rtept lat="52.683799379" lon="5.273557626">
+      </rtept>
+      <rtept lat="52.685449014" lon="5.280527881">
+      </rtept>
+      <rtept lat="52.687561614" lon="5.291985834">
+      </rtept>
+      <rtept lat="52.689888634" lon="5.295297061">
+      </rtept>
+      <rtept lat="52.693639129" lon="5.296129513">
+      </rtept>
+      <rtept lat="52.699373569" lon="5.295935274">
+      </rtept>
+      <rtept lat="52.703986202" lon="5.305674953">
+      </rtept>
+      <rtept lat="52.705947908" lon="5.302289652">
+      </rtept>
+    </rte>
+  </gpx>

@@ -1,3 +1,16 @@
+var latlng = [51.505, -0.09];
+var map;
+
+function onLocationFound(e) {
+	var radius = e.accuracy / 2;
+
+	L.marker(e.latlng).addTo(map).bindPopup("You are within " + radius + " meters from this point").openPopup();
+  L.circle(e.latlng, radius).addTo(map);
+}
+
+function onLocationError(e) {
+	alert(e.message);
+}
 
 function addLayers() {
   var osm = new L.TileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png');
@@ -13,4 +26,16 @@ function addLayers() {
         });
   map.addLayer(mapbox);
   map.addControl(new L.Control.Layers( {'OSM':osm, 'Mapbox':mapbox, 'Google':gmap, 'Transas':transas}, {'OpenSeaMap':openseamap}));
+}
+
+function initmap() {
+  map = L.map('map').setView(latlng, 6);
+    
+		
+	map.on('locationfound', onLocationFound);
+	map.on('locationerror', onLocationError);
+
+  addLayers();
+
+	//map.locate({setView: true, maxZoom: 16});
 }

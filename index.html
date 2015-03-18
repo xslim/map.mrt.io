@@ -5,7 +5,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
-  <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+  	<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+  	<script src="/app.js"></script>
 
 	<style>
 		body {
@@ -20,35 +21,6 @@
 <body data-pinterest-extension-installed="sa1.35">
 	<div id="map" class="leaflet-container leaflet-retina leaflet-fade-anim" tabindex="0" style="position: relative;"><div class="leaflet-map-pane"><div class="leaflet-tile-pane"></div><div class="leaflet-objects-pane"><div class="leaflet-shadow-pane"></div><div class="leaflet-overlay-pane"></div><div class="leaflet-marker-pane"></div><div class="leaflet-popup-pane"></div></div></div><div class="leaflet-control-container"><div class="leaflet-top leaflet-left"><div class="leaflet-control-zoom leaflet-bar leaflet-control"><a class="leaflet-control-zoom-in" href="#" title="Zoom in">+</a><a class="leaflet-control-zoom-out" href="#" title="Zoom out">-</a></div></div><div class="leaflet-top leaflet-right"></div><div class="leaflet-bottom leaflet-left"></div><div class="leaflet-bottom leaflet-right"><div class="leaflet-control-attribution leaflet-control"><a href="http://leafletjs.com" title="A JS library for interactive maps">Leaflet</a></div></div></div></div>
 
-	<script>
-		var map = L.map('map');
-
-		L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
-			maxZoom: 18,
-			attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
-				'<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-				'Imagery © <a href="http://mapbox.com">Mapbox</a>',
-			id: 'examples.map-i875mjb7'
-		}).addTo(map);
-
-		function onLocationFound(e) {
-			var radius = e.accuracy / 2;
-
-			L.marker(e.latlng).addTo(map)
-				.bindPopup("You are within " + radius + " meters from this point").openPopup();
-
-			L.circle(e.latlng, radius).addTo(map);
-		}
-
-		function onLocationError(e) {
-			alert(e.message);
-		}
-
-		map.on('locationfound', onLocationFound);
-		map.on('locationerror', onLocationError);
-
-		map.locate({setView: true, maxZoom: 16});
-	</script>
 
 
 </body></html>

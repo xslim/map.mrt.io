@@ -35,5 +35,7 @@ function initmap() {
   map.on('locationfound', onLocationFound);
   map.on('locationerror', onLocationError);
   addLayers();
+  
+  L.control.scale().addTo(map);
   //map.locate({setView: true, maxZoom: 16});
 }

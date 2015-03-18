@@ -24,7 +24,9 @@ function addLayers() {
             token: '7d6b0e2c-3684-40de-8b8c-c50deea14231'
         });
   map.addLayer(mapbox);
-  map.addControl(new L.Control.Layers( {'OSM':osm, 'Mapbox':mapbox, 'Google':gmap, 'Transas':transas}, {'OpenSeaMap':openseamap}));
+  map.addControl(new L.Control.Layers( 
+    {'OSM':osm, 'Mapbox':mapbox, 'Google':gmap, 'Transas':transas}, 
+    {'OpenSeaMap':openseamap}));
 }
 
 function initmap() {

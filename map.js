@@ -29,13 +29,8 @@ function addLayers() {
 }
 
 function initmap() {
-  map = L.map('map').setView(latlng, 6);
-    
-		
-	map.on('locationfound', onLocationFound);
-	map.on('locationerror', onLocationError);
-
+  map = L.map('map').setView(latlng, 6);map.on('locationfound', onLocationFound);
+  map.on('locationerror', onLocationError);
   addLayers();
-
-	//map.locate({setView: true, maxZoom: 16});
+  //map.locate({setView: true, maxZoom: 16});
 }

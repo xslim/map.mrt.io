@@ -1,4 +1,5 @@
-var latlng = [51.505, -0.09];
+var latlng = [52.4124, 4.8133];
+var zoom = 9;
 var map;
 
 function onLocationFound(e) {
@@ -23,14 +24,15 @@ function addLayers() {
             tms: true,
             token: '7d6b0e2c-3684-40de-8b8c-c50deea14231'
         });
-  map.addLayer(mapbox);
+  map.addLayer(gmap);
   map.addControl(new L.Control.Layers( 
     {'OSM':osm, 'Mapbox':mapbox, 'Google':gmap, 'Transas':transas}, 
     {'OpenSeaMap':openseamap}));
 }
 
 function initmap() {
-  map = L.map('map').setView(latlng, 6);map.on('locationfound', onLocationFound);
+  map = L.map('map').setView(latlng, zoom);
+  map.on('locationfound', onLocationFound);
   map.on('locationerror', onLocationError);
   addLayers();
   //map.locate({setView: true, maxZoom: 16});

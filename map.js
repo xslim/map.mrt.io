@@ -16,7 +16,7 @@ function onLocationError(e) {
 function addLayers() {
   
   var baseMaps = {}
-  var subLayers = {}
+  var overlayMaps = {}
   
   
   baseMaps['OSM'] = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png');

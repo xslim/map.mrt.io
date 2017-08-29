@@ -15,39 +15,27 @@ function onLocationError(e) {
 
 function addLayers() {
   
-  var baseLayers = {}
+  var baseMaps = {}
   var subLayers = {}
   
   
-  baseLayers['OSM'] = new L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png');
-  baseLayers['MapBox'] = new L.tileLayer('http://{s}.tiles.mapbox.com/v3/xslim.hgm2p8g2/{z}/{x}/{y}.png');
-  subLayers['OpenSeaMap'] = new L.tileLayer('http://tiles.openseamap.org/seamark/{z}/{x}/{y}.png');
+  baseMaps['OSM'] = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').;
+  baseMaps['MapBox'] = L.tileLayer('http://{s}.tiles.mapbox.com/v3/xslim.hgm2p8g2/{z}/{x}/{y}.png');
+  overlayMaps['OpenSeaMap'] = L.tileLayer('http://tiles.openseamap.org/seamark/{z}/{x}/{y}.png');
   
   var transasToken = '9e53bcb2-01d0-46cb-8aff-512e681185a4'
-  baseLayers['TX97'] = new L.tileLayer('http://wms.transas.com/tms/1.0.0/tx97/{z}/{x}/{y}.png?token='+transasToken, {
-            maxZoom: 17,
-            tms: true,
-            subdomains: 'abc'
-        });
-  baseLayers['UTT'] = new L.tileLayer('http://wms.transas.com/tms/1.0.0/tx97/{z}/{x}/{y}.png?token='+transasToken, {
-            maxZoom: 17,
-            tms: true,
-            subdomains: 'abc'
-        });
-  subLayers['TX97-Transp'] = new L.tileLayer('http://wms.transas.com/tms/1.0.0/tx97-transp/{z}/{x}/{y}.png?token='+transasToken, {
-          maxZoom: 17,
-          tms: true,
-          subdomains: 'abc'
-      });
+  var transasUrl = 'http://wms.transas.com/tms/1.0.0/{id}/{z}/{x}/{y}.png?token=' + transasToken
+  baseMaps['TX97'] = L.tileLayer(transasUrl, {id: 'tx97', maxZoom: 17, tms: true});
+  baseMaps['UTT'] = L.tileLayer(transasUrl, {id: 'utt', maxZoom: 17, tms: true});
+  overlayMaps['TX97-Transp'] = L.tileLayer(transasUrl, {id: 'tx97-transp', maxZoom: 17, tms: true});
   
   drawnItems = new L.FeatureGroup();
-  subLayers['Route'] = drawnItems
+  overlayMaps['Route'] = drawnItems
   
-  baseLayers['OSM'].addTo(map);
+  baseMaps['OSM'].addTo(map);
+  //map.addLayer(drawnItems);
   map.addLayer(drawnItems);
-  L.control.layers(baseLayers, subLayers).addTo(map);
-  
-  map.addControl(new L.Control.Layers(baseLayers, subLayers));
+  L.control.layers(baseMaps, overlayMaps).addTo(map);
 }
 
 function setupDrawing() {

@@ -19,9 +19,9 @@ function addLayers() {
   var overlayMaps = {}
   
   
-  baseMaps['OSM'] = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png');
-  baseMaps['MapBox'] = L.tileLayer('http://{s}.tiles.mapbox.com/v3/xslim.hgm2p8g2/{z}/{x}/{y}.png');
-  overlayMaps['OpenSeaMap'] = L.tileLayer('http://tiles.openseamap.org/seamark/{z}/{x}/{y}.png');
+  baseMaps['OSM'] = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {});
+  baseMaps['MapBox'] = L.tileLayer('http://{s}.tiles.mapbox.com/v3/xslim.hgm2p8g2/{z}/{x}/{y}.png', {});
+  overlayMaps['OpenSeaMap'] = L.tileLayer('http://tiles.openseamap.org/seamark/{z}/{x}/{y}.png', {});
   
   var transasToken = '9e53bcb2-01d0-46cb-8aff-512e681185a4';
   var transasUrl = 'http://wms.transas.com/tms/1.0.0/{id}/{z}/{x}/{y}.png?token=' + transasToken;

@@ -67,10 +67,16 @@ L.Permalink = {
       return query;
     },
     
-    parsePermalink: function(defaults = {zoom: 5, center: [0,0]}) {
-      if (window.location.hash !== '') {
-        var hash = window.location.hash.replace('#', '');
-        var query = L.Permalink.parseQuery(hash);
+    parsePermalink: function(defaults = {zoom: 3, center: 35,0]}) {
+      var path = null;
+      if (window.location.search !== '') {
+        path = window.location.search.replace('?', '');
+      } else if (window.location.hash !== '') {
+        path = window.location.hash.replace('#', '');
+      }
+      
+      if (path) {
+        var query = L.Permalink.parseQuery(path);
         
         if (query['path'] && query.path['enc']) {
           query.path = L.Polyline.fromEncoded(query.path.enc);

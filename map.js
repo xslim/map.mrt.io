@@ -23,7 +23,6 @@ function addLayers() {
             tms: true,
             token: '7d6b0e2c-3684-40de-8b8c-c50deea14231'
         });
-  map.addLayer(gmap);
   map.addControl(new L.Control.Layers( 
     {'OSM':osm, 'Mapbox':mapbox, 'Transas':transas}, 
     {'OpenSeaMap':openseamap}));

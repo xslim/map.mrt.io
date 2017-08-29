@@ -67,7 +67,7 @@ L.Permalink = {
       return query;
     },
     
-    parsePermalink: function(defaults = {zoom: 3, center: 35,0]}) {
+    parsePermalink: function(defaults = {zoom: 3, center: [35,0]}) {
       var path = null;
       if (window.location.search !== '') {
         path = window.location.search.replace('?', '');

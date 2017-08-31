@@ -142,10 +142,15 @@ function initMap() {
   //var mappos = L.Permalink.getMapLocation(7, [52.4124, 4.8133]);
   var permalink = L.Permalink.parsePermalink();
   
+  
+  
   map = L.map('map', {
     center: permalink.center,
     zoom: permalink.zoom
   });
+  
+  
+  //map.fitBounds(permalink.path.getBounds());
   
   L.Permalink.setup(map);
   

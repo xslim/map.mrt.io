@@ -40,7 +40,7 @@ L.Permalink = {
       }
       return query;
     },
-  
+    
     parseQuery: function(str) {
       if (typeof str != "string" || str.length == 0) return {};
       var s = str.split("&");
@@ -52,10 +52,6 @@ L.Permalink = {
         if (first.length == 0) continue;
         second = decodeURIComponent(bit[1]);
         
-        if (second.includes('|') || second.includes(':')) {
-          second = L.Permalink.parseSecondQuery(second, first);
-        }
-        
         if (typeof query[first] == "undefined") {
           query[first] = second;
         } else if (query[first] instanceof Array) {
@@ -65,13 +61,24 @@ L.Permalink = {
         }
       }
       
-      if (query['path'] && query.path['enc']) {
-        query['path'] = L.Polyline.fromEncoded(query.path['enc']);
+      if (query['path']) {
+        if (query.path.includes('enc:')) {
+          bit = query.path.split("enc:");
+          var polyline_encoded = bit[1];
+          
+          var polyline =  L.Polyline.fromEncoded(polyline_encoded);
+          
+          //TODO: add color parsing
+          query.path = polyline;
+        } else if (query.path.includes('|') || query.path.includes(':')) {
+          query.path = L.Permalink.parseSecondQuery(second, first);
+        }
       }
       
+      
       if (query['center']) {
-        var parts = query['center'].split(',');
-        query['center'] = {
+        var parts = query.center.split(',');
+        query.center = {
             lat: parseFloat(parts[0]),
             lng: parseFloat(parts[1])
         };

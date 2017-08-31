@@ -64,6 +64,23 @@ L.Permalink = {
           query[first] = [query[first], second]; 
         }
       }
+      
+      if (query['path'] && query.path['enc']) {
+        query['path'] = L.Polyline.fromEncoded(query.path['enc']);
+      }
+      
+      if (query['center']) {
+        var parts = query['center'].split(',');
+        query['center'] = {
+            lat: parseFloat(parts[0]),
+            lng: parseFloat(parts[1])
+        };
+      }
+      
+      if (query['zoom']) {
+        query['zoom'] = parseInt(query['zoom'], 10);
+      }
+      
       return query;
     },
     
@@ -77,22 +94,6 @@ L.Permalink = {
       
       if (path) {
         var query = L.Permalink.parseQuery(path);
-        
-        if (query['path'] && query.path['enc']) {
-          query.path = L.Polyline.fromEncoded(query.path.enc);
-        }
-        
-        if (query['center']) {
-          var parts = query.center.split(',');
-          query.center = {
-              lat: parseFloat(parts[0]),
-              lng: parseFloat(parts[1])
-          };
-        }
-        
-        if (query['zoom']) {
-          query.zoom = parseInt(query.zoom, 10);
-        }
         
         let actual = Object.assign({}, defaults, query);
         return actual;

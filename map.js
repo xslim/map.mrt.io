@@ -144,13 +144,13 @@ function initMap() {
   
   
   
-  map = L.map('map', {
-    center: permalink.center,
-    zoom: permalink.zoom
-  });
+  map = L.map('map');
   
-  
-  //map.fitBounds(permalink.path.getBounds());
+  if (permalink.path) {
+    map.fitBounds(permalink.path.getBounds());
+  } else {
+    map.setView(permalink.center, permalink.zoom)
+  }
   
   L.Permalink.setup(map);
   

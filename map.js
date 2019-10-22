@@ -15,12 +15,12 @@ function onLocationError(e) {
 }
 
 function addLayers() {
-  
+
   var baseMaps = {}
   var overlayMaps = {}
-  
+
   baseMaps['OSM'] = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {});
-  
+
   var mbToken = 'pk.eyJ1IjoieHNsaW0iLCJhIjoicmdIcHBUNCJ9.C0YuPXzXX4_UPIYbWvBdTw',
   mbUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=' + mbToken;
   //mbUrl = 'https://api.mapbox.com/styles/v1/mapbox/light-v9/tiles/256/{z}/{x}/{y}?access_token=' + mbToken;
@@ -30,28 +30,56 @@ function addLayers() {
   //baseMaps['Outdoors'] = L.tileLayer(mbUrl, {id: 'mapbox.outdoors'});
   //baseMaps['Run-Bike-Hike'] = L.tileLayer(mbUrl, {id: 'mapbox.run-bike-hike'});
   baseMaps['Pirates'] = L.tileLayer(mbUrl, {id: 'mapbox.pirates'});
-  
+
   baseMaps['Satellite'] = L.tileLayer(mbUrl, {id: 'mapbox.streets-satellite'});
   baseMaps['Grayscale'] = L.tileLayer(mbUrl, {id: 'mapbox.light'});
-  
+
   overlayMaps['OpenSeaMap'] = L.tileLayer('http://tiles.openseamap.org/seamark/{z}/{x}/{y}.png', {});
-  
-  var trToken = '9e53bcb2-01d0-46cb-8aff-512e681185a4',
-  trUrl = 'http://wms.transas.com/tms/1.0.0/{id}/{z}/{x}/{y}.png?token=' + trToken;
-  baseMaps['TX97'] = L.tileLayer(trUrl, {id: 'tx97', maxZoom: 17, tms: true});
-  baseMaps['UTT'] = L.tileLayer(trUrl, {id: 'utt', maxZoom: 17, tms: true});
-  overlayMaps['TX97-Transp'] = L.tileLayer(trUrl, {id: 'tx97-transp', maxZoom: 17, tms: true});
-  
+
+  // var trToken = '9e53bcb2-01d0-46cb-8aff-512e681185a4',
+  // trUrl = 'http://wms.transas.com/tms/1.0.0/{id}/{z}/{x}/{y}.png?token=' + trToken;
+  // baseMaps['TX97'] = L.tileLayer(trUrl, {id: 'tx97', maxZoom: 17, tms: true});
+  // baseMaps['UTT'] = L.tileLayer(trUrl, {id: 'utt', maxZoom: 17, tms: true});
+  // overlayMaps['TX97-Transp'] = L.tileLayer(trUrl, {id: 'tx97-transp', maxZoom: 17, tms: true});
+
+https://backend.navionics.com/tile/9/266/168?LAYERS=config_1_20.00_0&TRANSPARENT=FALSE&UGC=TRUE&navtoken=eyJrZXkiOiJOQVZJT05JQ1NfV0VCQVBQX1AwMSIsImtleURvbWFpbiI6IndlYmFwcC5uYXZpb25pY3MuY29tIiwicmVmZXJlciI6IndlYmFwcC5uYXZpb25pY3MuY29tIiwicmFuZG9tIjoxNTYyMzMzMzE3NDk1fQ
+  baseMaps['Navionics'] = L.tileLayer('https://tile5.navionics.io/tile/{z}/{x}/{y}?LAYERS=config_1_5_0&TRANSPARENT=FALSE&UGC=TRUE&theme=0&navtoken=eyJrZXkiOiJOQVZJT05JQ1NfV0VCQVBQX1AwMSIsImtleURvbWFpbiI6IndlYmFwcC5uYXZpb25pY3MuY29tIiwicmVmZXJlciI6IndlYmFwcC5uYXZpb25pY3MuY29tIiwicmFuZG9tIjoxNTYyMzMzMzE3NDk1fQ', {});
+  // overlayMaps['VirtualEarth'] = L.tileLayer('', {});
+  // http://ecn.t0.tiles.virtualearth.net/tiles/h03133101.jpeg?g=7234&mkt=en-us
+
   drawnItems = new L.FeatureGroup();
   overlayMaps['Route'] = drawnItems;
-  
+
   baseMaps['Emerald'].addTo(map);
-  overlayMaps['TX97-Transp'].addTo(map);
+  // overlayMaps['TX97-Transp'].addTo(map);
   overlayMaps['Route'].addTo(map);
-  
+
   //map.addLayer(drawnItems);
   L.control.layers(baseMaps, overlayMaps).addTo(map);
+
+  // var layers = [
+  //   {name: '', url: ''},
+  //   {name: '', url: ''},
+  //   {name: '', url: ''},
+  // ]
+  //
+  // var layerControl = L.control.layers;
+  //
+  //
+  // for (var i = 0; i < layers.length; i++) {
+  //     layer = layers[i];
+  // }
 }
+
+// function addLayer(layerData) {
+//   var layer = L.tileLayer(layerData.url);
+//   if (layerData.type && layerData.type == 'overlay') {
+//     L.control.layers.addOverlay(layer, layerData.name);
+//   } else {
+//     L.control.layers.addBaseLayer(layer, layerData.name);
+//   }
+//
+// }
 
 // Truncate value based on number of decimals
 function _round(num, len) {
@@ -82,7 +110,7 @@ function getPopupContent(layer) {
    }
    return null;
  }
- 
+
  function attachDrawPopup(layer) {
    var content = getPopupContent(layer);
    if (content !== null) {
@@ -106,13 +134,13 @@ function setupDrawing() {
       }
      });
      map.addControl(drawControl);
-  
+
   // Object created - bind popup to layer, add to feature group
     map.on(L.Draw.Event.CREATED, function(event) {
         var layer = event.layer;
         attachDrawPopup(layer);
         drawnItems.addLayer(layer);
-        
+
         L.Permalink.update();
     });
 
@@ -126,10 +154,10 @@ function setupDrawing() {
                 layer.setPopupContent(content);
             }
         });
-        
+
         L.Permalink.update();
     });
-    
+
     //window.api.drawnItems = drawnItems;
     window.api.drawControl = drawControl;
 }
@@ -138,33 +166,33 @@ function initMap() {
   //map = L.map('map').setView(latlng, zoom);
   //map.on('locationfound', onLocationFound);
   //map.on('locationerror', onLocationError);
-  
+
   //var mappos = L.Permalink.getMapLocation(7, [52.4124, 4.8133]);
   var permalink = L.Permalink.parsePermalink();
-  
-  
-  
+
+
+
   map = L.map('map');
-  
+
   if (permalink.path) {
     map.fitBounds(permalink.path.getBounds());
   } else {
     map.setView(permalink.center, permalink.zoom)
   }
-  
+
   L.Permalink.setup(map);
-  
+
   addLayers();
   setupDrawing();
-  
+
   L.control.scale().addTo(map);
   //map.locate({setView: true, maxZoom: 16});
-  
+
   if (permalink.path) {
     attachDrawPopup(permalink.path);
     drawnItems.addLayer(permalink.path);
   }
-  
+
   window.api.map = map;
-  
+
 }
